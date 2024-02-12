@@ -14,11 +14,23 @@ export async function read(cypher, params = {}){
     try{
         const res = await session.executeRead(tx => tx.run(cypher, params))
 
-        const values = res.records.map(record => record.toObject())
+        const values = res.records.map(record => record.toObject())     //array | za pristup .n.properties
 
-        console.log(values)
+        return values
     } 
     finally{
         await session.close();
     }
+}
+
+export async function getManagers(filter){
+
+    const query = 
+        `MATCH (n:Manager{name:'${filter}'}) return n`
+
+    const managers = await read(query)
+    managers.forEach(manager => {
+        console.log(manager.n.properties.name)
+    });
+
 }
