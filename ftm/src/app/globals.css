@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer utilities{
+    .navbar-item {
+        @apply flex justify-center text-white items-center h-4/5 my-2 px-2 hover:bg-sky-600 rounded-full
+    }
+}
